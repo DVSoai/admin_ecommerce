@@ -1,3 +1,4 @@
+import 'package:admin_ecommerce_app/pages/argument_page/argument_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,10 +9,21 @@ class AppRouter {
       GoRouter(initialLocation: RouterName.rootScreen, routes: [
     GoRoute(
         path: RouterName.rootScreen,
-        builder: (context, state) => const Scaffold(
+        builder: (context, state) => Scaffold(
               body: Center(
-                child: Text('ADMIN PANEL'),
-              ),
-            ))
+                  child: TextButton(
+                      onPressed: () {
+                        context.go(RouterName.argumentScreen,
+                            extra: 'Argument');
+                      },
+                      child: const Text('ArgumentScreen'))),
+            )),
+    GoRoute(
+      path: RouterName.argumentScreen,
+      builder: (context, state) {
+        final String extraData = state.extra as String;
+        return ArgumentScreen(text: extraData);
+      },
+    )
   ]);
 }
